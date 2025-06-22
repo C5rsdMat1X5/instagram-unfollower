@@ -101,4 +101,4 @@ instagram-following-remover/
 
 ## ✍️ Author
 
-Made with rage and sarcasm by [@m4ti.14s](https://github.com/m4tiashenriquez)
+Made with rage and sarcasm by [C5rsdMat1X5](https://github.com/C5rsdMat1X5)
