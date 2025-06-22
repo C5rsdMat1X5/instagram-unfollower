@@ -1,39 +1,39 @@
 # 📦 Instagram Following Remover
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?logo=python)  
 ![Playwright](https://img.shields.io/badge/Playwright-%E2%9C%94-green?logo=playwright)
 
-Un script en Python que automatiza la eliminación de cuentas seguidas en Instagram usando [Playwright](https://playwright.dev/python/), con exclusión de usuarios personalizados y soporte de sesión persistente.
+A Python script that automates unfollowing accounts on Instagram using [Playwright](https://playwright.dev/python/), with support for custom user exclusions and persistent session.
 
 ---
 
-## 🧠 ¿Qué hace este script?
+## 🧠 What does this script do?
 
-* Abre Instagram en un navegador controlado por código.
-* Usa tu sesión guardada para acceder a tu cuenta.
-* Va a tu lista de seguidos.
-* Hace scroll automático hasta encontrar nuevos usuarios.
-* Elimina (deja de seguir) a cada cuenta, excepto las que tú excluyas.
+* Opens Instagram in a programmatically controlled browser.  
+* Uses your saved session to access your account.  
+* Goes to your following list.  
+* Automatically scrolls until it finds new users.  
+* Unfollows each account except the ones you exclude.
 
 ---
 
-## ⚙️ Requisitos
+## ⚙️ Requirements
 
-* Python 3.10 o superior
+* Python 3.10 or higher  
 * [Playwright](https://playwright.dev/python/)
 
 ---
 
-## 🛠️ Instalación
+## 🛠️ Installation
 
-1. Clona este repositorio:
+1. Clone this repository:
 
 ```bash
-git clone https://github.com/tuusuario/instagram-following-remover.git
+git clone https://github.com/yourusername/instagram-following-remover.git
 cd instagram-following-remover
 ```
 
-2. Instala las dependencias necesarias:
+2. Install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -42,69 +42,69 @@ playwright install
 
 ---
 
-## 🚀 Cómo usar
+## 🚀 How to use
 
-### 1. Guardar el contexto de sesión
+### 1. Save session context
 
 ```bash
 python instagram-followin-remover.py save-context
 ```
 
-Esto abrirá Instagram en una ventana. Inicia sesión manualmente y luego presiona `Enter` en la consola.
+This will open Instagram in a window. Log in manually and then press `Enter` in the console.
 
-Esto guardará tu sesión en `instagram_storage_state.json`.
+This saves your session in `instagram_storage_state.json`.
 
 ---
 
-### 2. Eliminar seguidos automáticamente
+### 2. Automatically unfollow accounts
 
 ```bash
 python instagram-followin-remover.py start
 ```
 
-El script te pedirá:
+The script will ask for:
 
-* Tu nombre de usuario (sin @).
-* La lista de usuarios a excluir, separados por coma.
+* Your username (without the @ symbol).  
+* The list of users to exclude, separated by commas.
 
-**Ejemplo:**
+**Example:**
 
 ```
-Introduce tu nombre de usuario sin el @ (arroba): m4ti.14s  
-Introduce la lista de usuarios que quieres excluir sin el @ (arroba) (formato: usuario1,usuario2,...): juan,pedro,ana
+Enter your username without the @ symbol: m4ti.14s  
+Enter the list of users you want to exclude without the @ symbol (format: user1,user2,...): juan,pedro,ana
 ```
 
-El script empezará a dejar de seguir a todas las cuentas que no estén en la lista de exclusión.
+The script will start unfollowing all accounts not on the exclusion list.
 
 ---
 
-## 📁 Estructura de archivos
+## 📁 File structure
 
 ```
 instagram-following-remover/
 │
 ├── instagram-followin-remover.py
-├── instagram_storage_state.json  # Se crea después de guardar el contexto
+├── instagram_storage_state.json  # Created after saving the session context
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-## 🛯️ Notas
+## 🛯️ Notes
 
-* Instagram puede cambiar sus clases HTML en cualquier momento.
-* Este script no es oficial ni aprobado por Instagram.
-* Úsalo bajo tu propio riesgo. Evita automatizar en exceso para no ser baneado.
+* Instagram can change its HTML classes at any time.  
+* This script is unofficial and not approved by Instagram.  
+* Use at your own risk. Avoid excessive automation to prevent being banned.
 
 ---
 
 ## 🎨 Extra: ASCII Style
 
-Este script incluye un mini arte ASCII de Instagram en la terminal para que se vea pro al arrancar 🧓
+This script includes a mini ASCII Instagram art in the terminal to look pro on startup 🧓
 
 ---
 
-## ✍️ Autor
+## ✍️ Author
 
-Hecho con rabia y sarcasmo por [@m4ti.14s](https://github.com/m4tiashenriquez)
+Made with rage and sarcasm by [@m4ti.14s](https://github.com/m4tiashenriquez)
