@@ -91,17 +91,11 @@ instagram-following-remover/
 
 ---
 
-## 🛯️ Notes
+## 📝 Notes
 
 * Instagram can change its HTML classes at any time.  
 * This script is unofficial and not approved by Instagram.  
 * Use at your own risk. Avoid excessive automation to prevent being banned.
-
----
-
-## 🎨 Extra: ASCII Style
-
-This script includes a mini ASCII Instagram art in the terminal to look pro on startup 🧓
 
 ---
 
