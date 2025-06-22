@@ -30,7 +30,7 @@ A Python script that automates unfollowing accounts on Instagram using [Playwrig
 
 ```bash
 git clone https://github.com/C5rsdMat1X5/instagram-unfollower
-cd instagram-following-remover
+cd instagram-unfollower
 ```
 
 2. Install the required dependencies:
