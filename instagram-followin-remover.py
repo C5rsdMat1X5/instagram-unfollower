@@ -12,20 +12,20 @@ def save_context():
         context = browser.new_context()
         page = context.new_page()
         page.goto("https://www.instagram.com/")
-        input("\nInicia sesión manualmente y presiona Enter aquí cuando termines...")
+        input("\nLog in manually and press Enter here when you are done...")
         context.storage_state(path=CONTEXT_PATH)
-        print(f"\nContexto guardado en {CONTEXT_PATH}")
+        print(f"\nContext saved at {CONTEXT_PATH}")
         browser.close()
 
 def get_info():
-    username = input("Introduce tu nombre de usuario sin el @ (arroba): ").strip()
-    excluded_input = input("Introduce la lista de usuarios que quieres excluir sin el @ (arroba) (formato: usuario1,usuario2,...): ").strip()
+    username = input("Enter your username without the @ symbol: ").strip()
+    excluded_input = input("Enter the list of users you want to exclude without the @ symbol (format: user1,user2,...): ").strip()
     
     excluded = [user.strip() for user in excluded_input.split(",") if user.strip()]
     
     return username, excluded
 
-def open_followed_list(USERNAME, EXCLUIR):
+def open_followed_list(USERNAME, EXCLUDE):
     with sync_playwright() as p:
         try:
             browser = p.chromium.launch(headless=False)
@@ -33,7 +33,7 @@ def open_followed_list(USERNAME, EXCLUIR):
             page = context.new_page()
             page.goto(f"https://www.instagram.com/{USERNAME}/")
         except Exception as e:
-            print(f"❌ Error inicializando navegador o contexto: {e}")
+            print(f"❌ Error initializing browser or context: {e}")
             browser.close()
             return
         
@@ -45,7 +45,7 @@ def open_followed_list(USERNAME, EXCLUIR):
         container = page.query_selector("div.x6nl9eh.x1a5l9x9")
 
         if container is None:
-            print("❌ No se encontró el contenedor principal de usuarios.")
+            print("❌ Main user container not found.")
             return
 
         users = container.query_selector_all("div > div > div")
@@ -68,12 +68,12 @@ def open_followed_list(USERNAME, EXCLUIR):
 
             if not new_users:
                 if tries > 20:
-                    print("❌ Se acabaron los intentos se cerrara el programa automaticamente si quieres seguir vuelve a ejecutar el programa. ")
+                    print("❌ No new users found, closing the program automatically. If you want to continue, please run the program again.")
                     time.sleep(1)
                     browser.close()
                     break
                 print(
-                    f"⏳ No se encontraron usuarios nuevos. Haciendo scroll para intentar cargar más...quedan {20 - tries} intentos antes de cerrar"
+                    f"⏳ No new users found. Scrolling to try to load more... {20 - tries} attempts left before closing."
                 )
                 tries += 1
                 page.mouse.wheel(0, 500)
@@ -84,7 +84,7 @@ def open_followed_list(USERNAME, EXCLUIR):
                 try:
                     username_element = user.query_selector("span._ap3a")
                     if not username_element:
-                        print("❗ No se encontró el username, se salta este usuario.")
+                        print("❗ Username not found, skipping this user.")
                         continue
 
                     username = username_element.inner_text().strip()
@@ -92,48 +92,48 @@ def open_followed_list(USERNAME, EXCLUIR):
                         continue
                     processed_usernames.add(username)
 
-                    if username in EXCLUIR:
-                        print(f"⛔ Usuario excluido: {username}")
+                    if username in EXCLUDE:
+                        print(f"⛔ User excluded: {username}")
                         continue
 
                     button = user.query_selector("button._acan._acap._acat._aj1-._ap30")
                     if not button:
-                        print("❗ No se encontró el botón, se salta este usuario.")
+                        print("❗ Button not found, skipping this user.")
                         continue
 
-                    print(f"👉 Dejando de seguir a: {username}")
+                    print(f"👉 Unfollowing: {username}")
                     button.click()
                     time.sleep(0.5)
 
                     confirm_button = page.query_selector("button._a9--._ap36._a9-_")
                     if confirm_button:
                         confirm_button.click()
-                        print(f"✅ Confirmado: {username}")
+                        print(f"✅ Confirmed: {username}")
                         time.sleep(0.5)
 
                     page.mouse.wheel(0, 60)
                     time.sleep(0.2)
 
                 except Exception as e:
-                    print(f"⚠️ Error procesando usuario: {e}")
+                    print(f"⚠️ Error processing user: {e}")
                     continue
 
 def main():
-    parser = argparse.ArgumentParser(description="Un script que hace elimina seguidores de instagram. ")
-    parser.add_argument('command', choices=['save-context', 'start'], help="Comando a ejecutar")
+    parser = argparse.ArgumentParser(description="A script that unfollows Instagram users.")
+    parser.add_argument('command', choices=['save-context', 'start'], help="Command to execute")
 
     args = parser.parse_args()
 
     if args.command == 'save-context':
-        print("Guardando el contexto de sesión...")
+        print("Saving session context...")
         save_context()
     elif args.command == 'start':
-        print("Iniciando el programa...")
+        print("Starting the program...")
         print(BASE_PATH)
         u, e = get_info()
         open_followed_list(u, e)
     else:
-        print(f"Comando desconocido: {args.command}")
+        print(f"Unknown command: {args.command}")
 
 if __name__ == "__main__":
     print("""
